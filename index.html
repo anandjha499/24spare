@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24Spare Car Parts Selector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fb 0%, #c3cfe2 100%);
+            color: #1f2933;
+        }
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(15,23,42,0.15);
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        select:focus, input:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .products {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product {
+            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .product img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .product h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        button {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .filters {
+                grid-template-columns: 1fr;
+            }
+            .products {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="fas fa-wrench"></i> 24Spare</div>
+        <p>Your Trusted Source for Car Parts</p>
+    </header>
 
+    <h1><i class="fas fa-car"></i> 24Spare Car Parts Selector</h1>
+
+    <div class="container">
+        <div class="filters">
+            <div>
+                <label><i class="fas fa-industry"></i> Select Car Brand</label>
+                <select id="brandSelect">
+                    <option value="">Choose a Brand</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="honda">Honda</option>
+                    <option value="maruti">Maruti Suzuki</option>
+                    <option value="hyundai">Hyundai</option>
+                    <option value="tata">Tata</option>
+                    <option value="mahindra">Mahindra</option>
+                </select>
+            </div>
+            <div>
+                <label><i class="fas fa-car-side"></i> Select Car Model</label>
+                <select id="modelSelect" disabled>
+                    <option value="">Choose a Model</option>
+                </select>
+            </div>
+            <div>
+                <label><i class="fas fa-search"></i> Search Products</label>
+                <input type="text" id="search" placeholder="e.g., Oil, Filter">
+            </div>
+            <div>
+                <label><i class="fas fa-tags"></i> Filter by Category</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Engine Oil">Engine Oil</option>
+                    <option value="Coolant">Coolant</option>
+                    <option value="Gear Oil">Gear Oil</option>
+                    <option value="New Parts">New Parts</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="products" class="products">
+            <!-- Products will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        const brandSelect = document.getElementById('brandSelect');
+        const modelSelect = document.getElementById('modelSelect');
+        const searchInput = document.getElementById('search');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const productsDiv = document.getElementById('products');
+
+        const models = {
+            toyota: ['Corolla', 'Camry', 'Fortuner', 'Innova'],
+            honda: ['City', 'Civic', 'CR-V', 'Jazz'],
+            maruti: ['Swift', 'Baleno', 'Vitara Brezza', 'Ertiga'],
+            hyundai: ['i10', 'i20', 'Creta', 'Verna'],
+            tata: ['Nexon', 'Harrier', 'Safari', 'Tiago'],
+            mahindra: ['Scorpio', 'Bolero', 'Thar', 'XUV500']
+        };
+
+        const products = {
+            toyota: [
+                { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: '₹150', img: 'https://via.placeholder.com/120?text=Oil' },
+                { name: 'Premium Red Coolant', category: 'Coolant', price: '₹200', img: 'https://via.placeholder.com/120?text=Coolant' },
+                { name: 'ATF Transmission Oil', category: 'Gear Oil', price: '₹300', img: 'https://via.placeholder.com/120?text=Gear+Oil' },
+                { name: 'Air Filter', category: 'New Parts', price: '₹100', img: 'https://via.placeholder.com/120?text=Filter' },
+                { name: 'Spark Plugs Set', category: 'New Parts', price: '₹250', img: 'https://via.placeholder.com/120?text=Plugs' },
+                { name: 'Brake Pads', category: 'New Parts', price: '₹400', img: 'https://via.placeholder.com/120?text=Brakes' }
+            ],
+            honda: [
+                { name: 'Semi-Synthetic 15W-40 Engine Oil', category: 'Engine Oil', price: '₹160', img: 'https://via.placeholder.com/120?text=Oil' },
+                { name: 'Standard Blue Coolant', category: 'Coolant', price: '₹180', img: 'https://via.placeholder.com/120?text=Coolant' },
+                { name: 'Gear Oil 90', category: 'Gear Oil', price: '₹250', img: 'https://via.placeholder.com/120?text=Gear+Oil' },
+                { name: 'Oil Filter', category: 'New Parts', price: '₹80', img: 'https://via.placeholder.com/120?text=Oil+Filter' },
+                { name: 'Battery 12V', category: 'New Parts', price: '₹500', img: 'https://via.placeholder.com/120?text=Battery' },
+                { name: 'Wiper Blades', category: 'New Parts', price: '₹150', img: 'https://via.placeholder.com/120?text=Wipers' }
+            ],
+            maruti: [
+                { name: 'Synthetic 5W-30 Engine Oil', category: 'Engine Oil', price: '₹140', img: 'https://via.placeholder.com/120?text=Oil' },
+                { name: 'Premium Red Coolant', category: 'Coolant', price: '₹190', img: 'https://via.placeholder.com/120?text=Coolant' },
+                { name: 'ATF Transmission Oil', category: 'Gear Oil', price: '₹280', img: 'https://via.placeholder.com/120?text=Gear+Oil' },
+                { name: 'Air Filter', category: 'New Parts', price: '₹90', img: 'https://via.placeholder.com/120?text=Filter' },
+                { name: 'Clutch Plate', category: 'New Parts', price: '₹600', img: 'https://via.placeholder.com/120?text=Clutch' },
+                { name: 'Shock Absorbers', category: 'New Parts', price: '₹700', img: 'https://via.placeholder.com/120?text=Shocks' }
+            ],
+            hyundai: [
+                { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: '₹155', img: 'https://via.placeholder.com/120?text=Oil' },
+                { name: 'Standard Blue Coolant', category: 'Coolant', price: '₹175', img: 'https://via.placeholder.com/120?text=Coolant' },
+                { name: 'Gear Oil 90', category: 'Gear Oil', price: '₹260', img: 'https://via.placeholder.com/120?text=Gear+Oil' },
+                { name: 'Fuel Filter', category: 'New Parts', price: '₹120', img: 'https://via.placeholder.com/120?text=Fuel+Filter' },
+                { name: 'Radiator', category: 'New Parts', price: '₹800', img: 'https://via.placeholder.com/120?text=Radiator' },
+                { name: 'Exhaust System', category: 'New Parts', price: '₹1000', img: 'https://via.placeholder.com/120?text=Exhaust' }
+            ],
+            tata: [
+                { name: 'Diesel Engine Oil', category: 'Engine Oil', price: '₹170', img: 'https://via.placeholder.com/120?text=Diesel+Oil' },
+                { name: 'Heavy Duty Coolant', category: 'Coolant', price: '₹220', img: 'https://via.placeholder.com/120?text=Heavy+Coolant' },
+                { name: 'Manual Gear Oil', category: 'Gear Oil', price: '₹320', img: 'https://via.placeholder.com/120?text=Manual+Gear' },
+                { name: 'Turbo Filter', category: 'New Parts', price: '₹200', img: 'https://via.placeholder.com/120?text=Turbo' },
+                { name: 'Alloy Wheels', category: 'New Parts', price: '₹1500', img: 'https://via.placeholder.com/120?text=Wheels' },
+                { name: 'Suspension Kit', category: 'New Parts', price: '₹1200', img: 'https://via.placeholder.com/120?text=Suspension' }
+            ],
+            mahindra: [
+                { name: 'Off-Road Engine Oil', category: 'Engine Oil', price: '₹180', img: 'https://via.placeholder.com/120?text=Off-Road+Oil' },
+                { name: 'All-Terrain Coolant', category: 'Coolant', price: '₹210', img: 'https://via.placeholder.com/120?text=AT+Coolant' },
+                { name: '4x4 Gear Oil', category: 'Gear Oil', price: '₹350', img: 'https://via.placeholder.com/120?text=4x4+Gear' },
+                { name: 'Mud Flaps', category: 'New Parts', price: '₹300', img: 'https://via.placeholder.com/120?text=Mud+Flaps' },
+                { name: 'Roof Rack', category: 'New Parts', price: '₹900', img: 'https://via.placeholder.com/120?text=Roof+Rack' },
+                { name: 'Winch Kit', category: 'New Parts', price: '₹2500', img: 'https://via.placeholder.com/120?text=Winch' }
+            ]
+        };
+
+        function renderProducts() {
+            const brand = brandSelect.value;
+            const search = searchInput.value.toLowerCase();
+            const category = categoryFilter.value;
+            if (!brand) {
+                productsDiv.style.display = 'none';
+                return;
+            }
+            productsDiv.innerHTML = '';
+            products[brand].filter(p => {
+                return (!search || p.name.toLowerCase().includes(search)) &&
+                       (!category || p.category === category);
+            }).forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p><strong>Category:</strong> ${product.category}</p>
+                    <p><strong>Price:</strong> ${product.price}</p>
+                    <button>Add to Cart</button>
+                `;
+                productsDiv.appendChild(productDiv);
+            });
+            productsDiv.style.display = 'grid';
+        }
+
+        brandSelect.addEventListener('change', function() {
+            const brand = this.value;
+            modelSelect.innerHTML = '<option value="">Choose a Model</option>';
+            if (brand) {
+                models[brand].forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+                modelSelect.disabled = false;
+            } else {
+                modelSelect.disabled = true;
+            }
+            renderProducts();
+        });
+
+        modelSelect.addEventListener('change', renderProducts);
+        searchInput.addEventListener('input', renderProducts);
+        categoryFilter.addEventListener('change', renderProducts);
+    </script>
+</body>
+</html>
