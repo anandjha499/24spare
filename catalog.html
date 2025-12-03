@@ -95,14 +95,49 @@
     <script>
         // All products data (combine from index.html)
         const allProducts = [
-            { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: 150, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '0888083400', brand: 'toyota' },
-            { name: 'Premium Red Coolant', category: 'Coolant', price: 200, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: '00272SLL010', brand: 'toyota' },
-            { name: 'Air Filter', category: 'Filters', price: 100, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '178012P010', brand: 'toyota' },
-            { name: 'Synthetic 5W-30 Engine Oil', category: 'Engine Oil', price: 140, img: 'https://via.placeholder.com/250x200?text=Oil', oem: 'SUZUKI-OIL', brand: 'maruti' },
-            { name: 'Brake Pads Front', category: 'Brakes', price: 800, img: 'https://via.placeholder.com/250x200?text=Brakes', oem: 'MB688771', brand: 'maruti' },
-            { name: 'Clutch Kit', category: 'New Parts', price: 2500, img: 'https://via.placeholder.com/250x200?text=Clutch', oem: '2321070M00', brand: 'maruti' },
-            // Add more products here...
-        ];
+    // Toyota
+    { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: 150, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '0888083400', brand: 'toyota' },
+    { name: 'Premium Red Coolant', category: 'Coolant', price: 200, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: '00272SLL010', brand: 'toyota' },
+    { name: 'Air Filter', category: 'Filters', price: 100, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '178012P010', brand: 'toyota' },
+    { name: 'Brake Pads Front', category: 'Brakes', price: 800, img: 'https://via.placeholder.com/250x200?text=Brakes', oem: '04465-0D090', brand: 'toyota' },
+    { name: 'Spark Plugs Set', category: 'New Parts', price: 450, img: 'https://via.placeholder.com/250x200?text=Plugs', oem: '90919-01210', brand: 'toyota' },
+
+    // Honda
+    { name: 'Semi-Synthetic 15W-40 Engine Oil', category: 'Engine Oil', price: 160, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '18292PLC004', brand: 'honda' },
+    { name: 'Standard Blue Coolant', category: 'Coolant', price: 180, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'OL9998305', brand: 'honda' },
+    { name: 'Oil Filter', category: 'Filters', price: 80, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '15400PLCP01', brand: 'honda' },
+    { name: 'Battery 12V', category: 'New Parts', price: 500, img: 'https://via.placeholder.com/250x200?text=Battery', oem: '31500T2AA51', brand: 'honda' },
+    { name: 'Wiper Blades', category: 'New Parts', price: 150, img: 'https://via.placeholder.com/250x200?text=Wipers', oem: '38A7604A1', brand: 'honda' },
+
+    // Maruti Suzuki
+    { name: 'Synthetic 5W-30 Engine Oil', category: 'Engine Oil', price: 140, img: 'https://via.placeholder.com/250x200?text=Oil', oem: 'SUZUKI-OIL', brand: 'maruti' },
+    { name: 'Air Filter Swift', category: 'Filters', price: 90, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '13781M67P00', brand: 'maruti' },
+    { name: 'Brake Pads Front', category: 'Brakes', price: 650, img: 'https://via.placeholder.com/250x200?text=Brakes', oem: 'MB688771', brand: 'maruti' },
+    { name: 'Clutch Kit Swift', category: 'New Parts', price: 2500, img: 'https://via.placeholder.com/250x200?text=Clutch', oem: '2321070M00', brand: 'maruti' },
+    { name: 'Headlight Bulb', category: 'New Parts', price: 300, img: 'https://via.placeholder.com/250x200?text=Light', oem: '28899M67P00', brand: 'maruti' },
+
+    // Hyundai
+    { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: 155, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '0510001740', brand: 'hyundai' },
+    { name: 'Standard Blue Coolant', category: 'Coolant', price: 175, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'KOETCS043D', brand: 'hyundai' },
+    { name: 'Fuel Filter', category: 'Filters', price: 120, img: 'https://via.placeholder.com/250x200?text=Fuel', oem: '3191125000', brand: 'hyundai' },
+    { name: 'Radiator Hose', category: 'New Parts', price: 350, img: 'https://via.placeholder.com/250x200?text=Hose', oem: '252102G000', brand: 'hyundai' },
+    { name: 'CV Joint', category: 'New Parts', price: 1200, img: 'https://via.placeholder.com/250x200?text=CV+Joint', oem: '4950125800', brand: 'hyundai' },
+
+    // Tata
+    { name: 'Diesel Engine Oil 15W-40', category: 'Engine Oil', price: 170, img: 'https://via.placeholder.com/250x200?text=Diesel', oem: 'TATA-DIESEL', brand: 'tata' },
+    { name: 'Heavy Duty Coolant', category: 'Coolant', price: 220, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'TATA-COOLANT', brand: 'tata' },
+    { name: 'Turbo Air Filter', category: 'Filters', price: 200, img: 'https://via.placeholder.com/250x200?text=Turbo', oem: '2804030800', brand: 'tata' },
+    { name: 'Clutch Pressure Plate', category: 'New Parts', price: 1800, img: 'https://via.placeholder.com/250x200?text=Clutch', oem: 'TATA-CLUTCH', brand: 'tata' },
+    { name: 'Suspension Bush', category: 'New Parts', price: 400, img: 'https://via.placeholder.com/250x200?text=Bush', oem: '2354030800', brand: 'tata' },
+
+    // Mahindra
+    { name: 'Off-Road Engine Oil 20W-50', category: 'Engine Oil', price: 180, img: 'https://via.placeholder.com/250x200?text=Oil', oem: 'MAHINDRA-OIL', brand: 'mahindra' },
+    { name: 'All-Terrain Coolant', category: 'Coolant', price: 210, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'MAHINDRA-COOL', brand: 'mahindra' },
+    { name: '4x4 Gear Oil', category: 'Gear Oil', price: 350, img: 'https://via.placeholder.com/250x200?text=Gear+Oil', oem: 'MAHINDRA-GEAR', brand: 'mahindra' },
+    { name: 'Mud Flaps Set', category: 'New Parts', price: 300, img: 'https://via.placeholder.com/250x200?text=Mud', oem: 'MAHINDRA-MUD', brand: 'mahindra' },
+    { name: 'Roof Rack Bars', category: 'New Parts', price: 900, img: 'https://via.placeholder.com/250x200?text=Rack', oem: 'MAHINDRA-RACK', brand: 'mahindra' }
+];
+
 
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
