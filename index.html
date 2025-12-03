@@ -110,19 +110,50 @@
         };
 
         const products = {
-            toyota: [
-                { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: 150, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '0888083400' },
-                { name: 'Premium Red Coolant', category: 'Coolant', price: 200, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: '00272SLL010' },
-                { name: 'Air Filter', category: 'New Parts', price: 100, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '178012P010' }
-            ],
-            // Add your other brands same format (price as number, not string)
-            maruti: [
-                { name: 'Synthetic 5W-30 Engine Oil', category: 'Engine Oil', price: 140, img: 'https://via.placeholder.com/250x200?text=Oil', oem: 'SUZUKI-OIL' },
-                { name: 'Air Filter Swift', category: 'New Parts', price: 90, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '13781M67P00' }
-            ]
-            // Continue for all brands...
-        };
-
+    toyota: [
+        { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: 150, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '0888083400' },
+        { name: 'Premium Red Coolant', category: 'Coolant', price: 200, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: '00272SLL010' },
+        { name: 'Air Filter', category: 'New Parts', price: 100, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '178012P010' },
+        { name: 'Brake Pads Front', category: 'New Parts', price: 800, img: 'https://via.placeholder.com/250x200?text=Brakes', oem: '04465-0D090' },
+        { name: 'Spark Plugs Set', category: 'New Parts', price: 450, img: 'https://via.placeholder.com/250x200?text=Plugs', oem: '90919-01210' }
+    ],
+    honda: [
+        { name: 'Semi-Synthetic 15W-40 Engine Oil', category: 'Engine Oil', price: 160, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '18292PLC004' },
+        { name: 'Standard Blue Coolant', category: 'Coolant', price: 180, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'OL9998305' },
+        { name: 'Oil Filter', category: 'New Parts', price: 80, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '15400PLCP01' },
+        { name: 'Battery 12V', category: 'New Parts', price: 500, img: 'https://via.placeholder.com/250x200?text=Battery', oem: '31500T2AA51' },
+        { name: 'Wiper Blades', category: 'New Parts', price: 150, img: 'https://via.placeholder.com/250x200?text=Wipers', oem: '38A7604A1' }
+    ],
+    maruti: [
+        { name: 'Synthetic 5W-30 Engine Oil', category: 'Engine Oil', price: 140, img: 'https://via.placeholder.com/250x200?text=Oil', oem: 'SUZUKI-OIL' },
+        { name: 'Air Filter Swift', category: 'New Parts', price: 90, img: 'https://via.placeholder.com/250x200?text=Filter', oem: '13781M67P00' },
+        { name: 'Brake Pads Front', category: 'New Parts', price: 650, img: 'https://via.placeholder.com/250x200?text=Brakes', oem: 'MB688771' },
+        { name: 'Clutch Kit Swift', category: 'New Parts', price: 2500, img: 'https://via.placeholder.com/250x200?text=Clutch', oem: '2321070M00' },
+        { name: 'Headlight Bulb', category: 'New Parts', price: 300, img: 'https://via.placeholder.com/250x200?text=Light', oem: '28899M67P00' }
+    ],
+    hyundai: [
+        { name: 'Synthetic 10W-40 Engine Oil', category: 'Engine Oil', price: 155, img: 'https://via.placeholder.com/250x200?text=Oil', oem: '0510001740' },
+        { name: 'Standard Blue Coolant', category: 'Coolant', price: 175, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'KOETCS043D' },
+        { name: 'Fuel Filter', category: 'New Parts', price: 120, img: 'https://via.placeholder.com/250x200?text=Fuel', oem: '3191125000' },
+        { name: 'Radiator Hose', category: 'New Parts', price: 350, img: 'https://via.placeholder.com/250x200?text=Hose', oem: '252102G000' },
+        { name: 'CV Joint', category: 'New Parts', price: 1200, img: 'https://via.placeholder.com/250x200?text=CV+Joint', oem: '4950125800' }
+    ],
+    tata: [
+        { name: 'Diesel Engine Oil 15W-40', category: 'Engine Oil', price: 170, img: 'https://via.placeholder.com/250x200?text=Diesel', oem: 'TATA-DIESEL' },
+        { name: 'Heavy Duty Coolant', category: 'Coolant', price: 220, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'TATA-COOLANT' },
+        { name: 'Turbo Air Filter', category: 'New Parts', price: 200, img: 'https://via.placeholder.com/250x200?text=Turbo', oem: '2804030800' },
+        { name: 'Clutch Pressure Plate', category: 'New Parts', price: 1800, img: 'https://via.placeholder.com/250x200?text=Clutch', oem: 'TATA-CLUTCH' },
+        { name: 'Suspension Bush', category: 'New Parts', price: 400, img: 'https://via.placeholder.com/250x200?text=Bush', oem: '2354030800' }
+    ],
+    mahindra: [
+        { name: 'Off-Road Engine Oil 20W-50', category: 'Engine Oil', price: 180, img: 'https://via.placeholder.com/250x200?text=Oil', oem: 'MAHINDRA-OIL' },
+        { name: 'All-Terrain Coolant', category: 'Coolant', price: 210, img: 'https://via.placeholder.com/250x200?text=Coolant', oem: 'MAHINDRA-COOL' },
+        { name: '4x4 Gear Oil', category: 'Gear Oil', price: 350, img: 'https://via.placeholder.com/250x200?text=Gear+Oil', oem: 'MAHINDRA-GEAR' },
+        { name: 'Mud Flaps Set', category: 'New Parts', price: 300, img: 'https://via.placeholder.com/250x200?text=Mud', oem: 'MAHINDRA-MUD' },
+        { name: 'Roof Rack Bars', category: 'New Parts', price: 900, img: 'https://via.placeholder.com/250x200?text=Rack', oem: 'MAHINDRA-RACK' }
+    ]
+};
+        
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             document.getElementById('cartCount').textContent = cart.length;
